@@ -36,3 +36,12 @@ Publish directory: public
 Build command: empty (no build)
 
 
+
+
+## Environment variables on Render
+
+Set these in Render (Static Site -> Environment):
+- SITE_NAME: Optional, defaults to Pumpdrop
+- TREASURY_ADDRESS: Your Solana address to receive explicit tips (enables Tip button)
+- RPC_URL: Optional, defaults to https://api.mainnet-beta.solana.com
+- ALLOWLIST_URL: Optional JSON URL if you want to display custom eligibility (not used by default)

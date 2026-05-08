@@ -1,8 +1,9 @@
+
 services:
   - type: static
     name: pumpdrop-demo
     env: static
-    buildCommand: ""
+    buildCommand: "./build.sh"
     staticPublishPath: public
     headers:
       - path: "/**"
@@ -10,4 +11,4 @@ services:
         value: "DENY"
       - path: "/**"
         name: "Content-Security-Policy"
-        value: "default-src 'self'; img-src 'self' data: https:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src https://api.mainnet-beta.solana.com;"
+        value: "default-src 'self'; img-src 'self' data: https:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src https://api.mainnet-beta.solana.com https://api.mainnet.solana.com https://ssc-dao.genesysgo.net;"
