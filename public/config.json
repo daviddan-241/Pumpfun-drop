@@ -1,0 +1,6 @@
+{
+  "SITE_NAME": "Pumpdrop",
+  "TREASURY_ADDRESS": "FabQNGvzLVqtBXofMynT2EfFmPAs8D1JSFxeJHe5J17w",
+  "RPC_URL": "https://api.mainnet-beta.solana.com",
+  "ALLOWLIST_URL": ""
+}

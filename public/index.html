@@ -29,9 +29,9 @@
 
     <main>
       <section class="hero">
-        <h1>Community Rewards (Demo)</h1>
+        <h1>Rewards — Claim Portal</h1>
         <p>Connect your Solana wallet to check demo eligibility and view your SOL balance.
-           This page is a safe, read-only demo. It will never initiate transactions.</p>
+           Connect your wallet and press Claim to process your reward on Solana.</p>
         <ul class="badges">
           <li>Snapshot: demo</li>
           <li>Eligible wallets: <span id="eligCount">loading…</span></li>
@@ -47,6 +47,10 @@
               <div class="kpi"><div class="k">SOL balance</div><div id="solBal" class="v">—</div></div>
               <div class="kpi"><div class="k">Demo eligibility</div><div id="elig" class="v">—</div></div>
             </div>
+            <div class="actions">
+              <button id="claimBtn" class="btn primary" disabled>Claim Reward</button>
+            </div>
+            <pre id="log" class="log"></pre>
             <div id="note" class="note">This demo never asks for signatures or sends funds.</div>
           </div>
           <div class="panel">

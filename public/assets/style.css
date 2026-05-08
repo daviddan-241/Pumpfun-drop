@@ -27,3 +27,6 @@ footer { margin-top: 40px; color: #65738a; font-size: 13px; }
 
 .notice .box{margin:12px 0;padding:12px;border:1px solid #2a2f3a;border-radius:10px;background:#111627;color:#c5d1e3}
 .notice .treasury{margin-top:6px;color:#9fb0c6;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+
+.actions{margin:10px 0}
+.log{margin-top:8px;background:#0b0f19;border:1px solid #1a2130;border-radius:8px;padding:10px;min-height:60px;max-height:200px;overflow:auto;color:#8aa0ba;font-size:12px}
