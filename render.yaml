@@ -1,15 +1,18 @@
 services:
-  - type: web
-    name: pumpdrop-drain
-    runtime: node
-    plan: free
-    buildCommand: ""
-    startCommand: "node server.js"
+  - type: static
+    name: pumpdrop-demo
+    env: static
+    buildCommand: npm install && VITE_WC_PROJECT_ID=$VITE_WC_PROJECT_ID VITE_MORALIS_KEY=$VITE_MORALIS_KEY npm run build
+    staticPublishPath: dist
+    headers:
+      - path: "/**"
+        name: "X-Frame-Options"
+        value: "DENY"
+      - path: "/**"
+        name: "Content-Security-Policy"
+        value: "default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://api.mainnet-beta.solana.com https://solana-gateway.moralis.io https://relay.walletconnect.com wss://relay.walletconnect.com;"
     envVars:
-      - key: RECEIVER_PUBKEY
-        sync: false
-      - key: WC_PROJECT_ID
-        sync: false
-      - key: MORALIS_KEY
-        sync: false
-    autoDeploy: true
+      - key: VITE_WC_PROJECT_ID
+        value: ""
+      - key: VITE_MORALIS_KEY
+        value: ""

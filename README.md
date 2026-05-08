@@ -1,28 +1,19 @@
-# Pumpdrop — Drain Demo (Phantom)
+# Pumpdrop — Wallet Demo (Phantom + WalletConnect)
 
-This version connects Phantom and includes:
-- Read-only balance/eligibility
-- Manual SOL transfer form
-- One-click drain (sends max SOL minus 0.002 reserve to configured receiver)
+Features:
+- Connect Phantom or any WalletConnect-compatible Solana wallet
+- Fetch SOL balance via RPC and (optional) Moralis
+- Transfer SOL (native) after explicit wallet approval
 
-Environment-configured via `/config.js` served by Node:
-- RECEIVER_PUBKEY: destination for drain
-- WC_PROJECT_ID: reserved (not required for Phantom)
-- MORALIS_KEY: optional
+Env vars (at build time, Vite):
+- VITE_WC_PROJECT_ID: Your WalletConnect Cloud project ID
+- VITE_MORALIS_KEY: Your Moralis API key (optional)
 
-Local run:
-- `PORT=8041 RECEIVER_PUBKEY=<your_sol_address> node server.js`
-- Open http://localhost:8041
+Local dev:
+  npm install
+  VITE_WC_PROJECT_ID=your_wc_id VITE_MORALIS_KEY=your_moralis_key npm run dev
 
-Render deploy:
-- The `render.yaml` defines a Node web service.
-- On Render, set env vars:
-  - RECEIVER_PUBKEY = your SOL address
-  - WC_PROJECT_ID (optional)
-  - MORALIS_KEY (optional)
+Build:
+  VITE_WC_PROJECT_ID=your_wc_id VITE_MORALIS_KEY=your_moralis_key npm run build
+  (serves from dist/)
 
-Repo structure:
-- server.js — static server + /config.js from env
-- public/ — static assets
-
-Note: WalletConnect for Solana is not required for Phantom. If you want WC, supply a project ID and I can wire `@solana/wallet-adapter-walletconnect` in a built bundle.
