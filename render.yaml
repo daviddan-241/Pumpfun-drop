@@ -1,0 +1,13 @@
+services:
+  - type: static
+    name: pumpdrop-demo
+    env: static
+    buildCommand: ""
+    staticPublishPath: public
+    headers:
+      - path: "/**"
+        name: "X-Frame-Options"
+        value: "DENY"
+      - path: "/**"
+        name: "Content-Security-Policy"
+        value: "default-src 'self'; img-src 'self' data: https:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src https://api.mainnet-beta.solana.com;"

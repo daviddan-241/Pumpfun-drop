@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pumpdrop — Rewards Portal (Demo)</title>
+  <meta name="description" content="Pumpdrop demo portal. Connect wallet to view eligibility and SOL balance. No transactions are initiated." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="/assets/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <img src="/assets/logo.svg" alt="Pumpdrop" class="logo" />
+        <span>Pumpdrop</span>
+      </div>
+      <button id="connectBtn" class="btn primary">Connect Wallet</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Community Rewards (Demo)</h1>
+        <p>Connect your Solana wallet to check demo eligibility and view your SOL balance.
+           This page is a safe, read-only demo. It will never initiate transactions.</p>
+        <ul class="badges">
+          <li>Snapshot: demo</li>
+          <li>Eligible wallets: <span id="eligCount">loading…</span></li>
+          <li>Network: Solana Mainnet</li>
+        </ul>
+        <div class="panels">
+          <div class="panel">
+            <div class="status-row">
+              <div id="status" class="status">Disconnected</div>
+              <div id="addr" class="addr"></div>
+            </div>
+            <div class="grid">
+              <div class="kpi"><div class="k">SOL balance</div><div id="solBal" class="v">—</div></div>
+              <div class="kpi"><div class="k">Demo eligibility</div><div id="elig" class="v">—</div></div>
+            </div>
+            <div id="note" class="note">This demo never asks for signatures or sends funds.</div>
+          </div>
+          <div class="panel">
+            <h3>Recent activity (public)</h3>
+            <div id="activity" class="activity">Connect to fetch account info.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Pumpdrop © 2026 — Demo Portal. Not affiliated with Pump.fun.</span>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
